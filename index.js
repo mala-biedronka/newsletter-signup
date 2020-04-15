@@ -1,17 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
-//API key
-// 89c2909009ebcc52010f389def2f4519-us19
-
-//List ID
-// 89875d14e7
+const https =require("https");
 
 const app = express();
-
-
-
-
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -37,7 +30,22 @@ app.post("/", function (req, res) {
                 }
             }
         ]
-    }
+    };
+    const jsonData = JSON.stringify(data);
+
+    //Create a POST request
+    const url = process.env.URL_MAILCHIMP + process.env.LIST_ID_MAILCHIMP;
+    const options = {
+        method: "POST",
+        auth: "login:" + process.env.API_KEY_MAILCHIMP
+    };
+
+    https.request(url, options, function (response) {
+        response.on("data", function (data) {
+            console.log(data);
+        })
+
+    })
 
 });
 
