@@ -41,7 +41,7 @@
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 
 <!-- JS, Popper.js, and jQuery   -->
 <!--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
@@ -50,14 +50,14 @@
 
 </head>
 <body class="text-center">
-<form class="form-signin">
+<form class="form-signin" action="/" method="post">
     <img class="mb-4" src="images/fox.png" alt="" width="72" height="72">
 
     <h1 class="h3 mb-3 font-weight-normal">Signup to My Newsletters!</h1>
 
-    <input type="text" class="form-control" placeholder="First Name" required autofocus>
-    <input type="text" class="form-control" placeholder="Last Name" required>
-    <input type="email" class="form-control" placeholder="Email" required>
+    <input type="text" class="form-control top" name="firstName" placeholder="First Name" required autofocus>
+    <input type="text" class="form-control middle" name="lastName" placeholder="Last Name" required>
+    <input type="email" class="form-control bottom" name="emailAddress" placeholder="Email" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign me Up!</button>
 
     <p class="mt-5 mb-3 text-muted">&copy; Made by Iryna Predborska</p>
