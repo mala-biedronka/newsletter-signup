@@ -50,6 +50,9 @@ app.post("/", function (req, res) {
 
         response.on("data", function (data) {
             const returnedObject = JSON.parse(data);
+            if (returnedObject.errors) {
+                console.log(returnedObject.errors);
+            }
         });
     });
     request.write(jsonData);
