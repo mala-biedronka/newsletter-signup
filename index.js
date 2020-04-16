@@ -33,23 +33,34 @@ app.post("/", function (req, res) {
     };
     const jsonData = JSON.stringify(data);
 
-    //Create a POST request
+    //Create a POST request to the Mailchimp server
     const url = process.env.URL_MAILCHIMP + process.env.LIST_ID_MAILCHIMP;
     const options = {
         method: "POST",
         auth: "login:" + process.env.API_KEY_MAILCHIMP
     };
 
-    https.request(url, options, function (response) {
-        response.on("data", function (data) {
-            console.log(data);
-        })
+    const request = https.request(url, options, function (response) {
 
-    })
+        if (response.statusCode === 200) {
+            res.sendFile(__dirname + "/success.html");
+        } else {
+            res.sendFile(__dirname + "/failure.html");
+        }
+
+        response.on("data", function (data) {
+            const returnedObject = JSON.parse(data);
+        });
+    });
+    request.write(jsonData);
+    request.end();
+
 
 });
 
-
+app.post("/failure", function (req, res) {
+    res.redirect("/");
+});
 
 app.listen(3000, function () {
     console.log("Server is running on port 3000.")
