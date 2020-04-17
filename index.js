@@ -42,9 +42,7 @@ app.post("/", function (req, res) {
 
     const request = https.request(url, options, function (response) {
 
-        if (response.statusCode === 200) {
-            res.sendFile(__dirname + "/success.html");
-        } else {
+        if (response.statusCode !== 200) {
             res.sendFile(__dirname + "/failure.html");
         }
 
@@ -52,6 +50,9 @@ app.post("/", function (req, res) {
             const returnedObject = JSON.parse(data);
             if (returnedObject.errors) {
                 console.log(returnedObject.errors);
+                res.sendFile(__dirname + "/failure.html");
+            } else {
+                res.sendFile(__dirname + "/success.html");
             }
         });
     });
