@@ -43,12 +43,13 @@ app.post("/", function (req, res) {
     const request = https.request(url, options, function (response) {
 
         if (response.statusCode !== 200) {
+            console.log(response);
             res.sendFile(__dirname + "/failure.html");
         }
 
         response.on("data", function (data) {
             const returnedObject = JSON.parse(data);
-            if (returnedObject.errors) {
+            if (returnedObject.errors && returnedObject.errors.length > 0) {
                 console.log(returnedObject.errors);
                 res.sendFile(__dirname + "/failure.html");
             } else {
